@@ -16,10 +16,10 @@ window {
 }
 
 /* ---- Entry ---- */ 
-entry {
-  width: 43%;
-  placeholder: " ✨ Search / Choose which Animations to load";
-}
+// entry {
+//   width: 43%;
+//   placeholder: " ✨ Search / Choose which Animations to load";
+// }
 
 /* ---- Listview ---- */
 listview {

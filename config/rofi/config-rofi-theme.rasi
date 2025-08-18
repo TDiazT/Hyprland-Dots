@@ -25,10 +25,10 @@ custombox {
 }
 
 /* ---- Entry input ---- */
-entry {
-  expand: true;
-  placeholder: " ⬇️  Select Which Rofi Theme wanted to apply";
-}
+// entry {
+//   expand: true;
+//   placeholder: " ⬇️  Select Which Rofi Theme wanted to apply";
+// }
 
 /* ---- Listview ---- */
 listview {

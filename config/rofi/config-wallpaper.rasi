@@ -19,12 +19,12 @@ mainbox {
     [ "inputbar", "listview"];
 }
 
-entry {
-  expand: true;
-  placeholder: " 🎞️ Search / Choose Wallpaper";
-  horizontal-align: 0.5;
-  horizontal-align: 0.5;
-}
+// entry {
+//   expand: true;
+//   placeholder: " 🎞️ Search / Choose Wallpaper";
+//   horizontal-align: 0.5;
+//   horizontal-align: 0.5;
+// }
 
 /* ---- Listview ---- */
 listview {
