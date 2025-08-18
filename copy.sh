@@ -476,7 +476,7 @@ fi
 
 printf "${INFO} - copying dotfiles ${SKY_BLUE}first${RESET} part\n"
 # Config directories which will ask the user whether to replace or not
-DIRS="fastfetch kitty rofi swaync"
+DIRS="fastfetch kitty rofi swaync zathura"
 
 for DIR2 in $DIRS; do
   DIRPATH="$HOME/.config/$DIR2"
@@ -495,6 +495,7 @@ for DIR2 in $DIRS; do
         echo -e "${NOTE} - Backed up $DIR2 to $DIRPATH-backup-$BACKUP_DIR." 2>&1 | tee -a "$LOG"
 
         # Copy the new config
+        # TODO: Make symbolic link
         cp -r "config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
         echo -e "${OK} - Replaced $DIR2 with new configuration." 2>&1 | tee -a "$LOG"
 
