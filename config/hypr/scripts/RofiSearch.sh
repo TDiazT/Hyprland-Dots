@@ -32,6 +32,5 @@ if pgrep -x "rofi" >/dev/null; then
   pkill rofi
 fi
 
-# Open Rofi and pass the selected query to xdg-open for Google search
+# Open Rofi and pass the selected query to xdg-open for DuckDuckGo search
 echo "" | rofi -dmenu -config "$rofi_theme" | xargs -I{} xdg-open $Search_Engine
-

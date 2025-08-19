@@ -1,5 +1,5 @@
 /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
-/* Rofi Config for Google Search) */
+/* Rofi Config for DuckDuckGo Search) */
 
 @import "~/.config/rofi/config.rasi"  
 
@@ -18,7 +18,7 @@ window {
 /* ---- Entry ---- */ 
 entry {
 	expand: true;
-	placeholder: " 🔎 DuckDuckGo Search";
+	placeholder: "DuckDuckGo Search";
 	horizontal-align: 0.5;
 	padding: 15px;
 	border-radius: inherit;
