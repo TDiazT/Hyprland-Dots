@@ -903,47 +903,6 @@ if [ -d "$sddm_simple_sddm_2" ]; then
   done
 fi
 
-# additional wallpapers
-printf "\n%.0s" {1..1}
-echo "${MAGENTA}By default only a few wallpapers are copied${RESET}..."
-
-while true; do
-  echo -n "${CAT} Would you like to download additional wallpapers? ${WARN} This is 1GB in size (y/n): "
-  read WALL
-
-  case $WALL in
-  [Yy])
-    echo "${NOTE} Downloading additional wallpapers..."
-    if git clone "https://github.com/JaKooLit/Wallpaper-Bank.git"; then
-      echo "${OK} Wallpapers downloaded successfully." 2>&1 | tee -a "$LOG"
-
-      # Check if wallpapers directory exists and create it if not
-      if [ ! -d "$HOME/Pictures/wallpapers" ]; then
-        mkdir -p "$HOME/Pictures/wallpapers"
-        echo "${OK} Created wallpapers directory." 2>&1 | tee -a "$LOG"
-      fi
-
-      if cp -R Wallpaper-Bank/wallpapers/* "$HOME/Pictures/wallpapers/" >>"$LOG" 2>&1; then
-        echo "${OK} Wallpapers copied successfully." 2>&1 | tee -a "$LOG"
-        rm -rf Wallpaper-Bank 2>&1 # Remove cloned repository after copying wallpapers
-        break
-      else
-        echo "${ERROR} Copying wallpapers failed" 2>&1 | tee -a "$LOG"
-      fi
-    else
-      echo "${ERROR} Downloading additional wallpapers failed" 2>&1 | tee -a "$LOG"
-    fi
-    ;;
-  [Nn])
-    echo "${NOTE} You chose not to download additional wallpapers." 2>&1 | tee -a "$LOG"
-    break
-    ;;
-  *)
-    echo "Please enter 'y' or 'n' to proceed."
-    ;;
-  esac
-done
-
 # CLeaning up of ~/.config/ backups
 cleanup_backups() {
   CONFIG_DIR="$HOME/.config"
