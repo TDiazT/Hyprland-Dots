@@ -52,19 +52,6 @@ if grep -iq '^\(ID_LIKE\|ID\)=.*\(debian\|ubuntu\)' /etc/os-release >/dev/null 2
   exit 1
 fi
 
-printf "\n%.0s" {1..1}
-echo -e "\e[35m
-    ╦╔═┌─┐┌─┐╦    ╔╦╗┌─┐┌┬┐┌─┐
-    ╠╩╗│ ││ │║     ║║│ │ │ └─┐ 2025
-    ╩ ╩└─┘└─┘╩═╝  ═╩╝└─┘ ┴ └─┘
-\e[0m"
-printf "\n%.0s" {1..1}
-
-####### Announcement
-echo "${WARNING}A T T E N T I O N !${RESET}"
-echo "${MAGENTA}Kindly visit KooL Hyprland Own Wiki for changelogs${RESET}"
-printf "\n%.0s" {1..1}
-
 # Create Directory for Copy Logs
 if [ ! -d Copy-Logs ]; then
   mkdir Copy-Logs
@@ -387,8 +374,7 @@ for DIR2 in $DIRS; do
         echo -e "${NOTE} - Backed up $DIR2 to $DIRPATH-backup-$BACKUP_DIR." 2>&1 | tee -a "$LOG"
 
         # Copy the new config
-        # TODO: Make symbolic link
-        cp -r "config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
+        ln -sf "config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
         echo -e "${OK} - Replaced $DIR2 with new configuration." 2>&1 | tee -a "$LOG"
 
         # Restoring rofi themes directory unique themes
@@ -422,8 +408,8 @@ for DIR2 in $DIRS; do
     done
   else
     # Copy new config if directory does not exist
-    cp -r "config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
-    echo -e "${OK} - Copy completed for ${YELLOW}$DIR2${RESET}" 2>&1 | tee -a "$LOG"
+    ln -sf "config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
+    echo -e "${OK} - Symbolic link completed for ${YELLOW}$DIR2${RESET}" 2>&1 | tee -a "$LOG"
   fi
 done
 
@@ -444,7 +430,7 @@ if [ -d "$DIRPATHw" ]; then
       echo -e "${NOTE} - Backed up $DIRW to $DIRPATHw-backup-$BACKUP_DIR." 2>&1 | tee -a "$LOG"
 
       # Remove the old $DIRPATHw and copy the new one
-      rm -rf "$DIRPATHw" && cp -r "config/$DIRW" "$DIRPATHw" 2>&1 | tee -a "$LOG"
+      rm "$DIRPATHw" && ln -s "config/$DIRW" "$DIRPATHw" 2>&1 | tee -a "$LOG"
 
       # Step 1: Handle waybar symlinks
       for file in "config" "style.css"; do
@@ -564,9 +550,9 @@ for DIR_NAME in $DIR; do
 
   # Copy the new config
   if [ -d "config/$DIR_NAME" ]; then
-    cp -r "config/$DIR_NAME/" "$HOME/.config/$DIR_NAME" 2>&1 | tee -a "$LOG"
+    ln -sf "config/$DIR_NAME/" "$HOME/.config/$DIR_NAME" 2>&1 | tee -a "$LOG"
     if [ $? -eq 0 ]; then
-      echo "${OK} - Copy of config for ${YELLOW}$DIR_NAME${RESET} completed!"
+      echo "${OK} - Symbolic link of config for ${YELLOW}$DIR_NAME${RESET} completed!"
     else
       echo "${ERROR} - Failed to copy $DIR_NAME."
       exit 1
@@ -975,4 +961,3 @@ printf "${INFO} However, it is ${MAGENTA}HIGHLY SUGGESTED${RESET} to logout and 
 printf "\n%.0s" {1..1}
 printf "${SKY_BLUE}Thank you${RESET} for using ${MAGENTA}KooL's Hyprland Configuration${RESET}... ${YELLOW}ENJOY!!!${RESET}"
 printf "\n%.0s" {1..3}
-
