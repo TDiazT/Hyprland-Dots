@@ -1,0 +1,9 @@
+
+# Archivos generados en runtime por Hyprland / wallust / nwg-displays
+config/hypr/.initial_startup_done
+config/hypr/wallust/wallust-hyprland.conf
+config/hypr/wallpaper_effects/.wallpaper_current
+config/hypr/wallpaper_effects/.wallpaper_modified
+
+# Logs del instalador de dotfiles
+Copy-Logs/
