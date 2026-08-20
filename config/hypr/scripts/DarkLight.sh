@@ -20,6 +20,11 @@ wallust_config="$HOME/.config/wallust/wallust.toml"
 pallete_dark="dark16"
 pallete_light="light16"
 
+# Preferred waybar style per mode. Name of a file in ~/.config/waybar/style
+# without the .css extension. Leave empty to pick a random one matching the mode.
+waybar_style_dark="[Extra] Modern-Combined - Transparent"
+waybar_style_light=""
+
 # intial kill process
 for pid in waybar rofi swaync ags swaybg; do
     killall -SIGUSR1 "$pid"
@@ -68,7 +73,18 @@ set_waybar_style() {
     waybar_style_link="$HOME/.config/waybar/style.css"
     style_prefix="\\[${theme}\\].*\\.css$"
 
-    style_file=$(find -L "$waybar_styles" -maxdepth 1 -type f -regex ".*$style_prefix" | shuf -n 1)
+    # Use the pinned style for this mode if one is configured and present
+    if [ "$theme" = "Dark" ]; then
+        pinned="$waybar_style_dark"
+    else
+        pinned="$waybar_style_light"
+    fi
+
+    if [ -n "$pinned" ] && [ -f "$waybar_styles/$pinned.css" ]; then
+        style_file="$waybar_styles/$pinned.css"
+    else
+        style_file=$(find -L "$waybar_styles" -maxdepth 1 -type f -regex ".*$style_prefix" | shuf -n 1)
+    fi
 
     if [ -n "$style_file" ]; then
         ln -sf "$style_file" "$waybar_style_link"
